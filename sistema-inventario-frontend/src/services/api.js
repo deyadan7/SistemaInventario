@@ -5,7 +5,7 @@ import axios from "axios";
 
 // 1️⃣ Configuración base
 const api = axios.create({
-  baseURL: "http://127.0.0.1:8000/api/productos/", // URL del backend Django
+  baseURL: "http://127.0.0.1:8000/api/", // URL del backend Django
 });
 
 // 2️⃣ Funciones para cada entidad
