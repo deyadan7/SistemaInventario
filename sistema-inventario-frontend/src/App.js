@@ -1,43 +1,27 @@
 import React, { useState } from "react";
-import ProductoList from "./components/Productos/ProductoList";
-import ProductoForm from "./components/Productos/ProductoForm";
-import ProveedorForm from "./components/Proveedores/ProveedoresForm";
-import ProveedorList from "./components/Proveedores/ProveedoresList";
-import MovimientoForm from "./components/Movimientos/MovimientoForm";
-import MovimientoList from "./components/Movimientos/MovimientoList";
+import { BrowserRouter as Router } from "react-router-dom";
+import Login from "./components/Auth/Login";
+import RoutePages from './routes/RoutePages';
 
 function App() {
-  const [productoSeleccionado, setProductoSeleccionado] = useState(null);
-  const [recargar, setRecargar] = useState(false);
+  const [autenticado, setAutenticado] = useState(
+    !!localStorage.getItem("access")
+  );
 
-  const handleSaved = () => {
-    setProductoSeleccionado(null);
-    setRecargar(!recargar);
+  const handleLogout = () => {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+    setAutenticado(false);
   };
 
+  if (!autenticado) {
+    return <Login onLoginSuccess={() => setAutenticado(true)} />;
+  }
+
   return (
-    <div style={{ margin: "20px" }}>
-      <h1>🧠 Sistema Inteligente de Inventario</h1>
-
-      <h2>Productos</h2>
-      <ProductoForm
-        productoSeleccionado={productoSeleccionado}
-        onSaved={handleSaved}
-      />
-      <ProductoList onEdit={setProductoSeleccionado} key={recargar} />
-
-      <hr />
-
-      <h2>Proveedores</h2>
-      <ProveedorForm onSaved={handleSaved} />
-      <ProveedorList />
-
-      <hr />
-
-      <h2>Movimientos de Inventario</h2>
-      <MovimientoForm onSaved={handleSaved} />
-      <MovimientoList />
-    </div>
+    <Router>
+      <RoutePages onLogout={handleLogout} />
+    </Router>
   );
 }
 

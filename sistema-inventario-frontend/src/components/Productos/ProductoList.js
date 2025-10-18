@@ -1,5 +1,3 @@
-// src/components/Productos/ProductoList.js
-// Muestra la lista de productos obtenidos desde la API Django.
 
 import React, { useEffect, useState } from "react";
 import { getProductos, deleteProducto } from "../../services/api";

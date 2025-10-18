@@ -28,7 +28,7 @@ class Producto(models.Model):
     creado_en = models.DateTimeField(auto_now_add=True)
 
     def esta_por_vencer(self, dias=7):
-        """Devuelve True si el producto está próximo a vencer."""
+        
         if not self.fecha_vencimiento:
             return False
         return (self.fecha_vencimiento - timezone.now().date()).days <= dias
@@ -55,7 +55,7 @@ class MovimientoInventario(models.Model):
         ordering = ['-fecha']
 
     def save(self, *args, **kwargs):
-        """Actualiza el stock del producto según el tipo de movimiento."""
+        
         super().save(*args, **kwargs)
         if self.tipo == 'IN':
             self.producto.stock += self.cantidad

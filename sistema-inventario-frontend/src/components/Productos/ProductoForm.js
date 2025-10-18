@@ -1,5 +1,3 @@
-// src/components/Productos/ProductoForm.js
-// Formulario para registrar o actualizar productos con estilo Bootstrap
 
 import React, { useState, useEffect } from "react";
 import { createProducto, updateProducto } from "../../services/api";
@@ -12,7 +10,7 @@ function ProductoForm({ productoSeleccionado, onSaved }) {
     stock_minimo: "",
   });
 
-  // Cargar datos si se está editando
+  
   useEffect(() => {
     if (productoSeleccionado) {
       setForm(productoSeleccionado);
@@ -21,12 +19,12 @@ function ProductoForm({ productoSeleccionado, onSaved }) {
     }
   }, [productoSeleccionado]);
 
-  // Manejar cambios en los campos
+ 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Guardar o actualizar producto
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (productoSeleccionado) {
